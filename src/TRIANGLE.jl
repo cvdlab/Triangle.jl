@@ -11,35 +11,31 @@ end
 print("Started")
 
 # REAL = double = Cdouble
-type triangulateio
-  pointlist::Array{Cdouble}
-  pointattributelist::Array{Cdouble}
-  pointmarkerlist::Array{Cint}                                         /* In / out */
-  numberofpoints::Cint                                           /* In / out */
-  numberofpointattributes::Cint                                   /* In / out */
-
-  trianglelist::Array{Cint}                                           /* In / out */
-  triangleattributelist::Array{Cdouble}                                   /* In / out *
-  trianglearealist::Array{Cdouble}                                        /* In only */
-  neighborlist::Array{Cint}                                          /* Out only */
-  numberoftriangles::Cint                                         /* In / out */
-  numberofcorners::Cint                                          /* In / out */
-  numberoftriangleattributes::Cint                                /* In / out */
-
-  segmentlist::Array{Cint}                                                /* In / out */
-  segmentmarkerlist::Array{Cint}                                          /* In / out */
-  numberofsegments::Cint                                          /* In / out */
-
-  holelist::Array{Cdouble}                        /* In / pointer to array copied out */
-  numberofholes::Cint                                      /* In / copied out */
-
-  regionlist::Array{Cdouble}                      /* In / pointer to array copied out */
-  numberofregions::Cint                                    /* In / copied out */
-
-  edgelist::Array{Cint}                                                   /* Out only */
-  edgemarkerlist::Array{Cint}              /* Not used with Voronoi diagram; out only */
-  normlist::Array{Cdouble}               /* Used only with Voronoi diagram; out only */
-  numberofedges::Cint                                             /* Out only *
+type TriangulateIO
+  pointlist::Ptr{Cdouble}
+  pointattributelist::Ptr{Cdouble}
+  pointmarkerlist::Ptr{Cint}
+  numberofpoints::Cint
+  numberofpointattributes::Cint
+  trianglelist::Ptr{Cint}
+  triangleattributelist::Ptr{Cdouble}
+  trianglearealist::Ptr{Cdouble}
+  neighborlist::Ptr{Cint}
+  numberoftriangles::Cint
+  numberofcorners::Cint
+  numberoftriangleattributes::Cint
+  segmentlist::Ptr{Cint}
+  segmentmarkerlist::Ptr{Cint}
+  numberofsegments::Cint
+  holelist::Ptr{Cdouble}
+  numberofholes::Cint
+  regionlist::Ptr{Cdouble}
+  numberofregions::Cint
+  edgelist::Ptr{Cint}
+  edgemarkerlist::Ptr{Cint}
+  normlist::Ptr{Cdouble}
+  numberofedges::Cint
+  TriangulateIO() = new(C_NULL, C_NULL, C_NULL, 0, 0, C_NULL, C_NULL, C_NULL, C_NULL, 0, 0, 0, C_NULL, C_NULL, 0, C_NULL, 0, C_NULL, 0, C_NULL, C_NULL, C_NULL, 0)
 end
 
 end
