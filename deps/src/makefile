@@ -7,6 +7,18 @@ TARGET_LIB = libtriangle.so # target lib
 SRCS = tricall.c triangle.c # source files
 OBJS = $(SRCS:.c=.o)
 
+ifeq ($(OS),Windows_NT)
+    CFLAGS += -DCPU86
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CFLAGS += -DLINUX
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        LDFLAGS = -dynamiclib -undefined suppress -flat_namespace
+    endif
+endif
+
 .PHONY: all
 all: ${TARGET_LIB}
 
