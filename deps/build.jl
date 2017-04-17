@@ -34,7 +34,7 @@ isfile("deps.jl") && rm("deps.jl")
     end
 
 if is_windows()
-    @BinDeps.install Dict(:libwin => :_jl_libtriangle)
+    @BinDeps.install Dict(:libwin => :jl_libtriangle)
 else
-    @BinDeps.install Dict(:libnix => :_jl_libtriangle)
+    @BinDeps.install Dict(:libnix => :jl_libtriangle)
 end
