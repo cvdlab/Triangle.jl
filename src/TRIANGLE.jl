@@ -61,7 +61,7 @@ function runtest()
   a[5] = 1.
   a[6] = 0.
   inTri.pointlist = pointer(a)
-  inTri.numberofpoints = len(a)/2
+  inTri.numberofpoints = length(a)/2
 
   outTri,voroTri = ctriangulate(inTri, options)
 end

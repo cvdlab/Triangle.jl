@@ -4,11 +4,13 @@ isfile("deps.jl") && rm("deps.jl")
 
 @BinDeps.setup
     deps = [libnix = library_dependency("libtriangle", aliases = ["libtriangle.so","libtriangle.dylib"], runtime = false, os = :Unix),
-            libwin = library_dependency("libtriangle", aliases = ["libtriangle.dll"], runtime = false, os = :Windows)]
+            libwin = library_dependency("libtriangle", runtime = false, os = :Windows)]
+
     rootdir = BinDeps.depsdir(libnix)
     if is_windows()
         rootdir = BinDeps.depsdir(libwin)
     end
+
     srcdir = joinpath(rootdir, "src")
     prefix = joinpath(rootdir, "usr")
     libdir = joinpath(prefix, "lib")
@@ -18,7 +20,8 @@ isfile("deps.jl") && rm("deps.jl")
         libfile = joinpath(libdir, "libtriangle.dll")
         userdit = ENV["USERPROFILE"]
         vcpython="AppData\\Local\\Programs\\Common\\Microsoft\\Visual\ C++\ for\ Python\\9.0\\vcvarsall.bat"
-        provides(BinDeps.SimpleBuild, (@build_steps begin
+        @build_steps begin
+            FileRule(libfile, @build_steps begin
                  BinDeps.run(@build_steps begin
                     ChangeDirectory(srcdir)
                     `$userdit\\$vcpython & nmake -f makefile.win clean & nmake -f makefile.win`
@@ -27,7 +30,9 @@ isfile("deps.jl") && rm("deps.jl")
                     `cmd /c copy tricall.h $headerdir`
                     `cmd /c copy commondefine.h $headerdir`
                     `$userdit\\$vcpython & nmake -f makefile.win clean`
-            end) end), libwin)
+            end) end) end
+
+        provides(Binaries, Dict(URI(libfile) => deps), os = :Windows)
     else 
         libname = "libtriangle.so"
         if is_apple()
