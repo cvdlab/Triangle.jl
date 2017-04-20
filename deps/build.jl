@@ -3,13 +3,9 @@ using BinDeps
 isfile("deps.jl") && rm("deps.jl")
 
 @BinDeps.setup
-    deps = library_dependency("libtriangle", aliases = ["libtriangle.dylib"], runtime = false)
+    libtriangle = library_dependency("libtriangle", aliases = ["libtriangle.dylib"], runtime = true)
 
-    rootdir = BinDeps.depsdir(libnix)
-    if is_windows()
-        rootdir = BinDeps.depsdir(libwin)
-    end
-
+    rootdir = BinDeps.depsdir(libtriangle)
     srcdir = joinpath(rootdir, "src")
     prefix = joinpath(rootdir, "usr")
     libdir = joinpath(prefix, "lib")
@@ -31,7 +27,7 @@ isfile("deps.jl") && rm("deps.jl")
                     `$userdit\\$vcpython & nmake -f makefile.win clean`
             end) end) end
 
-        provides(Binaries, Dict(URI(libfile) => deps), os = :Windows)
+        provides(Binaries, URI(libfile), libtriangle)
     else 
         libname = "libtriangle.so"
         if is_apple()
@@ -49,7 +45,7 @@ isfile("deps.jl") && rm("deps.jl")
                         `cp commondefine.h $headerdir/`
                         `make clean`
                     end)
-                end), deps)
+                end), libtriangle)
     end
 
-@BinDeps.install Dict(:deps => :libtriangle)
+@BinDeps.install Dict(:libtriangle => :libtriangle)

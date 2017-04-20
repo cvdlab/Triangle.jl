@@ -52,7 +52,7 @@ end
 
 function runtest()
   # Options
-  options = "pz"
+  options = "p"
   inTri = TriangulateIO()
   a = Vector{Cdouble}(6)
   a[1] = 0.
