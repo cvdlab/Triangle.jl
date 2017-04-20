@@ -1,4 +1,5 @@
 module TRIANGLE
+export runtest
 
 depsjl = joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")
 
@@ -7,8 +8,6 @@ if isfile(depsjl)
 else
 	error("TRIANGLE is not properly installed. Please try to run\nPkg.build(\"TRIANGLE\")")
 end
-
-print("Started")
 
 # REAL = double = Cdouble
 type TriangulateIO
@@ -36,6 +35,35 @@ type TriangulateIO
   normlist::Ptr{Cdouble}
   numberofedges::Cint
   TriangulateIO() = new(C_NULL, C_NULL, C_NULL, 0, 0, C_NULL, C_NULL, C_NULL, C_NULL, 0, 0, 0, C_NULL, C_NULL, 0, C_NULL, 0, C_NULL, 0, C_NULL, C_NULL, C_NULL, 0)
+end
+
+function ctriangulate(inTri::TriangulateIO, options::String)
+  outTri = TriangulateIO()
+  voronoiTri = TriangulateIO()
+  ccall(
+    (:call_triangulate, jl_libtriangle), 
+    Void, 
+    (Ptr{UInt8}, Ref{TriangulateIO}, Ref{TriangulateIO}, Ref{TriangulateIO}), 
+    options, Ref(inTri), Ref(outTri), Ref(voronoiTri)
+  )
+
+  (outTri, voronoiTri)
+end
+
+function runtest()
+  options = "pz"
+  inTri = TriangulateIO()
+  a = Vector{Cdouble}(6)
+  a[1] = 0.
+  a[2] = 0.
+  a[3] = 0.
+  a[4] = 1.
+  a[5] = 1.
+  a[6] = 0.
+  inTri.pointlist = pointer(a)
+  inTri.numberofpoints = len(a)/2
+
+  outTri,voroTri = ctriangulate(inTri, options)
 end
 
 end
