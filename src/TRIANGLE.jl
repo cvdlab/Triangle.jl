@@ -41,7 +41,7 @@ function ctriangulate(inTri::TriangulateIO, options::String)
   outTri = TriangulateIO()
   voronoiTri = TriangulateIO()
   ccall(
-    (:call_triangulate, jl_libtriangle), 
+    (:call_triangulate, libtriangle), 
     Void, 
     (Ptr{UInt8}, Ref{TriangulateIO}, Ref{TriangulateIO}, Ref{TriangulateIO}), 
     options, Ref(inTri), Ref(outTri), Ref(voronoiTri)
@@ -51,6 +51,7 @@ function ctriangulate(inTri::TriangulateIO, options::String)
 end
 
 function runtest()
+  # Options
   options = "pz"
   inTri = TriangulateIO()
   a = Vector{Cdouble}(6)
@@ -62,8 +63,10 @@ function runtest()
   a[6] = 0.
   inTri.pointlist = pointer(a)
   inTri.numberofpoints = length(a)/2
-
-  outTri,voroTri = ctriangulate(inTri, options)
+  # Call tri in C
+  tupleRes = ctriangulate(inTri, options)
+  # Ret
+  tupleRes
 end
 
 end

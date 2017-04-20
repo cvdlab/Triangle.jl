@@ -3,8 +3,7 @@ using BinDeps
 isfile("deps.jl") && rm("deps.jl")
 
 @BinDeps.setup
-    deps = [libnix = library_dependency("libtriangle", aliases = ["libtriangle.so","libtriangle.dylib"], runtime = false, os = :Unix),
-            libwin = library_dependency("libtriangle", runtime = false, os = :Windows)]
+    deps = library_dependency("libtriangle", aliases = ["libtriangle.dylib"], runtime = false)
 
     rootdir = BinDeps.depsdir(libnix)
     if is_windows()
@@ -53,8 +52,4 @@ isfile("deps.jl") && rm("deps.jl")
                 end), libnix)
     end
 
-if is_windows()
-    @BinDeps.install Dict(:libwin => :jl_libtriangle)
-else
-    @BinDeps.install Dict(:libnix => :jl_libtriangle)
-end
+@BinDeps.install Dict(:deps => :libtriangle)
