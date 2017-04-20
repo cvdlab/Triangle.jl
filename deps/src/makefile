@@ -1,29 +1,33 @@
-CC = gcc # C compiler
-CFLAGS = -fPIC -Wall -Wextra -O2 -g # C flags
-LDFLAGS = -shared  # linking flags
-RM = rm -f  # rm command
-TARGET_LIB = libtriangle.so # target lib
+# C compiler
+CC=gcc
+LINK=gcc
+# C flags
+CFLAGS=-fPIC -Wall -Wextra -O2 -g 
+# linking flags
+LDFLAGS=-shared
+# rm command
+RM=rm -f
+# target lib
+TARGET_LIB=libtriangle.so 
 
-SRCS = tricall.c triangle.c # source files
-OBJS = $(SRCS:.c=.o)
+# source files
+SRCS=tricall.c triangle.c 
+OBJS=$(SRCS:.c=.o)
 
-ifeq ($(OS),Windows_NT)
-    CFLAGS += -DCPU86
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    CFLAGS += -DLINUX
 else
-    UNAME_S := $(shell uname -s)
-    ifeq ($(UNAME_S),Linux)
-        CFLAGS += -DLINUX
-    endif
-    ifeq ($(UNAME_S),Darwin)
-        LDFLAGS = -dynamiclib -undefined suppress -flat_namespace
-    endif
+
+ifeq ($(UNAME_S),Darwin)
+    LDFLAGS = -dynamiclib -undefined suppress -flat_namespace
 endif
 
 .PHONY: all
 all: ${TARGET_LIB}
 
 $(TARGET_LIB): $(OBJS)
-	$(CC) ${LDFLAGS} -o $@ $^
+	$(LINK) ${LDFLAGS} -o $@ $^
 
 $(SRCS:.c=.d):%.d:%.c
 	$(CC) $(CFLAGS) -MM $< >$@
