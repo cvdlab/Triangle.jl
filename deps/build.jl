@@ -49,7 +49,7 @@ isfile("deps.jl") && rm("deps.jl")
                         `cp commondefine.h $headerdir/`
                         `make clean`
                     end)
-                end), libnix)
+                end), deps)
     end
 
 @BinDeps.install Dict(:deps => :libtriangle)
