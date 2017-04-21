@@ -52,26 +52,31 @@ end
 
 function runtest()
   # Options
-  options = "pz"
+  options = ""
   inTri = TriangulateIO()
-  a = Vector{Cdouble}(6)
+  a = Vector{Cdouble}(8)
   a[1] = 0.
   a[2] = 0.
   a[3] = 0.
   a[4] = 1.
   a[5] = 1.
   a[6] = 0.
-  inTri.pointlist = pointer(a,1)
-  inTri.numberofpoints = length(a)/2
-  b = Vector{Cint}(3)
+  a[7] = 1.
+  a[8] = 1.
+  inTri.pointlist = pointer(a)
+  inTri.numberofpoints = Cint(length(a)/2)
+  b = Vector{Cint}(4)
   b[1] = 1
   b[2] = 2
   b[3] = 3
-  inTri.pointmarkerlist = pointer(b,1)
+  b[4] = 4
+  inTri.pointmarkerlist = pointer(b)
   # Call tri in C
   tupleRes = ctriangulate(inTri, options)
   # Ret
   tupleRes
 end
+
+# elems = unsafe_wrap(Array, a[1].trianglelist, a[1].numberoftriangles*a[1].numberofcorners, true)
 
 end
