@@ -52,7 +52,7 @@ end
 
 function runtest()
   # Options
-  options = "p"
+  options = "pz"
   inTri = TriangulateIO()
   a = Vector{Cdouble}(6)
   a[1] = 0.
@@ -61,8 +61,13 @@ function runtest()
   a[4] = 1.
   a[5] = 1.
   a[6] = 0.
-  inTri.pointlist = pointer(a)
+  inTri.pointlist = pointer(a,1)
   inTri.numberofpoints = length(a)/2
+  b = Vector{Cint}(3)
+  b[1] = 1
+  b[2] = 2
+  b[3] = 3
+  inTri.pointmarkerlist = pointer(b,1)
   # Call tri in C
   tupleRes = ctriangulate(inTri, options)
   # Ret
