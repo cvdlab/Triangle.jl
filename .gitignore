@@ -56,6 +56,8 @@ dkms.conf
 *.jl.*.cov
 *.jl.mem
 deps/deps.jl
+deps/usr/**/*.h
+deps/usr/**/*.c
 
 # Mac
 .DS_Store

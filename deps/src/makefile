@@ -16,11 +16,11 @@ OBJS=$(SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-    CFLAGS += -DLINUX
+    CFLAGS+=-DLINUX
 else
 
 ifeq ($(UNAME_S),Darwin)
-    LDFLAGS = -dynamiclib -undefined suppress -flat_namespace
+    LDFLAGS=-dynamiclib -undefined suppress -flat_namespace
 endif
 
 .PHONY: all
