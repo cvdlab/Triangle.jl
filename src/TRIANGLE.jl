@@ -77,6 +77,31 @@ function runtest()
   tupleRes
 end
 
-# elems = unsafe_wrap(Array, a[1].trianglelist, a[1].numberoftriangles*a[1].numberofcorners, true)
+function basic_triangulation(vertices::Array{Float64,2})
+  vert_size = size(vertices)
+  flat_vertices = Vector{Cdouble}(vert_size[1]*vert_size[2])
+  flat_vertices_map = Vector{Cint}(collect(1:1:vert_size[1]))
+  for vert_id=1:vert_size[1]
+    flat_vertices[(vert_id*2)-1]=vertices[vert_id]
+    flat_vertices[(vert_id*2)]=vertices[vert_id+vert_size[1]]
+  end
+
+  # Basic Tri
+  options = ""
+  inTri = TriangulateIO()  
+  inTri.pointlist = pointer(flat_vertices)
+  inTri.numberofpoints = Cint(vert_size[1])
+  inTri.pointmarkerlist = pointer(flat_vertices_map)
+
+  # Call C
+  tupleRes = ctriangulate(inTri, options)
+  tupleRes[1]
+end
+
+function decode_result(outTri::TriangulateIO)
+  elems = unsafe_wrap(Array, outTri.trianglelist, outTri.numberoftriangles*outTri.numberofcorners, true)
+  print(elems)
+  outTri.trianglelist = C_NULL
+end
 
 end
