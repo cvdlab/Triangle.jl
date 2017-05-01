@@ -18,7 +18,13 @@ function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint
 
   # Call C
   tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
-  tupleRes[1]
+  
+  triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
+  tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
+  
+  tupleRes[1].trianglelist = C_NULL
+
+  return triangleList
 end
 
 function ctriangulate(inTri::TriangulateIO, options::String)
@@ -32,17 +38,6 @@ function ctriangulate(inTri::TriangulateIO, options::String)
   )
 
   (outTri, voronoiTri)
-end
-
-function decode_result(triObject::TriangulateIO)
-  elems = unsafe_wrap(Array, triObject.trianglelist, triObject.numberoftriangles*triObject.numberofcorners, true)
-  print(elems)
-  triObject.trianglelist = C_NULL
-
-  # trianglelist
-  # triangleattributelist
-  # neighborlist
-
 end
 
 end
