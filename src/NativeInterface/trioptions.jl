@@ -29,23 +29,23 @@
 /*   quiet: -Q switch.  verbose: count of how often -V switch is selected.   */
 /*   usesegments: -p, -r, -q, or -c switch; determines whether segments are  */
 /*     used at all.                                                          */
-/*                                                                           */
+/* 
+
+/*  If the size of the object file is important to you, you may wish to      */
+/*  generate a reduced version of triangle.o.  The REDUCED symbol gets rid   */
+/*  of all features that are primarily of research interest.  Specifically,  */
+/*  the -DREDUCED switch eliminates Triangle's -i, -F, -s, and -C switches.  */
+/*  The CDT_ONLY symbol gets rid of all meshing algorithms above and beyond  */
+/*  constrained Delaunay triangulation.  Specifically, the -DCDT_ONLY switch */
+/*  eliminates Triangle's -r, -q, -a, -u, -D, -Y, -S, and -s switches.       */                                                                          */
 =#
 
 @enum TriangulateOptionsArea noarea=0 fixedarea=1 vararea=2
 @enum TriangulateOptionsWeight noweight=0 oneweigth=1 twoweight=2
-@enum TriangulateOptionsSteinerPoints nospoints=0 #= Y =# nospointsmesh=1 #= YY =# spointsforbidden=2 #= S =# usespoints=3
 
 type TriangulateOptions
-    refine::Bool # r
-    quality::Bool # q
-    qualityMinAngle::Float64
-    vararea::TriangulateOptionsArea # a
-    varareaOptionalmaxarea::Float64
-    usertest::Bool # u
     regionattrib::Bool # A
     convex::Bool # c
-    conformingdelaunay::Bool # D
     weighted::TriangulateOptionsWeight
     jettison::Bool # j
     firstnumberiszero::Bool # z
@@ -61,19 +61,13 @@ type TriangulateOptions
     noexactaritmetic::Bool # X
     order::Bool # o
     orderHow::Int64 # 1...2...3
-    steiner::TriangulateOptionsSteinerPoints # Y or YY or S
-    steinerQty::Int64
-    incrementaldelaunay::Bool # i
-    sweepline::Bool # F
     dwyer::Bool # l
-    splitseg::Bool # s
     docheck::Bool # C
     quiet::Bool # Q
     verbose::Bool # V
-    TriangulateOptions() = new(false, false, 0., noarea, 0., false, 
-    false, false, false, noweight, false, false, false, false, false, 
+    TriangulateOptions() = new(false, false, noweight, false, false, false, false, false, 
     false, false, false, false, false, false, false, false, 0, 
-    nospoints, 0, false, false, false, false, false, false, false)
+    false, false, false, false)
 end
 
 function toNativeString(self::TriangulateOptions)

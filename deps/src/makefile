@@ -9,6 +9,8 @@ LDFLAGS=-shared
 RM=rm -f
 # target lib
 TARGET_LIB=libtriangle.so 
+# Tridef
+CFLAGS+=-DTRILIBRARY -DREDUCED -DCDT_ONLY
 
 # source files
 SRCS=tricall.c triangle.c 
@@ -17,7 +19,7 @@ OBJS=$(SRCS:.c=.o)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     CFLAGS+=-DLINUX
-else
+endif
 
 ifeq ($(UNAME_S),Darwin)
     LDFLAGS=-dynamiclib -undefined suppress -flat_namespace

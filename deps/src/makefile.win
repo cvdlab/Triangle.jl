@@ -2,7 +2,7 @@
 CC=cl.exe
 LINK=link.exe
 # C flags
-CFLAGS=/DCPU86 /GL
+CFLAGS=/DCPU86 /DTRILIBRARY /DREDUCED /DCDT_ONLY /GL
 # linking flags
 LDFLAGS=/LTCG /DLL
 # target lib

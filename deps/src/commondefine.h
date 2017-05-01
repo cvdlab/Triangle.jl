@@ -3,9 +3,6 @@
     #define _NDIM 2
 
     #define TRIANGULATEIO_NAME "triangulateio"
-    #define CDT_ONLY 1
-    #define TRILIBRARY 1
-    #define REDUCED 1
     #define NO_TIMER 1
     #define ANSI_DECLARATORS 1
 	#define VOID int
