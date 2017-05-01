@@ -6,9 +6,20 @@ include("trioptions.jl")
 depsjl = joinpath(dirname(@__FILE__), "../..", "deps", "deps.jl")
 include(depsjl)
 
-export ctriangulate
-export TriangulateIO
+export basic_triangulation
 export TriangulateOptions
+
+function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions)
+  # Basic Tri
+  inTri = TriangulateIO()  
+  inTri.pointlist = pointer(vertices)
+  inTri.numberofpoints = length(verticesMap)
+  inTri.pointmarkerlist = pointer(verticesMap)
+
+  # Call C
+  tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
+  tupleRes[1]
+end
 
 function ctriangulate(inTri::TriangulateIO, options::String)
   outTri = TriangulateIO()
@@ -24,9 +35,9 @@ function ctriangulate(inTri::TriangulateIO, options::String)
 end
 
 function decode_result(triObject::TriangulateIO)
-  elems = unsafe_wrap(Array, outTri.trianglelist, outTri.numberoftriangles*outTri.numberofcorners, true)
+  elems = unsafe_wrap(Array, triObject.trianglelist, triObject.numberoftriangles*triObject.numberofcorners, true)
   print(elems)
-  outTri.trianglelist = C_NULL
+  triObject.trianglelist = C_NULL
 
   # trianglelist
   # triangleattributelist

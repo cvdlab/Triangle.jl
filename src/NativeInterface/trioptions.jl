@@ -40,13 +40,9 @@
 /*  eliminates Triangle's -r, -q, -a, -u, -D, -Y, -S, and -s switches.       */                                                                          */
 =#
 
-@enum TriangulateOptionsArea noarea=0 fixedarea=1 vararea=2
-@enum TriangulateOptionsWeight noweight=0 oneweigth=1 twoweight=2
-
 type TriangulateOptions
     regionattrib::Bool # A
     convex::Bool # c
-    weighted::TriangulateOptionsWeight
     jettison::Bool # j
     firstnumberiszero::Bool # z
     edgesout::Bool # e
@@ -65,11 +61,90 @@ type TriangulateOptions
     docheck::Bool # C
     quiet::Bool # Q
     verbose::Bool # V
-    TriangulateOptions() = new(false, false, noweight, false, false, false, false, false, 
-    false, false, false, false, false, false, false, false, 0, 
+    TriangulateOptions() = new(false, false, false, false, false, false, false, 
+    true, true, true, false, true, false, false, 
+    false, 0, 
     false, false, false, false)
 end
 
-function toNativeString(self::TriangulateOptions)
+function getTriangulateStringOptions(self::TriangulateOptions)
+    output_stri = ""
 
+    if self.regionattrib
+        output_stri = output_stri * "A"
+    end
+    
+    if self.convex
+        output_stri = output_stri * "c"
+    end
+
+    if self.jettison
+        output_stri = output_stri * "j"
+    end
+
+    if self.firstnumberiszero
+        output_stri = output_stri * "z"
+    end
+
+    if self.edgesout
+        output_stri = output_stri * "e"
+    end
+
+    if self.voronoi
+        output_stri = output_stri * "v"
+    end
+
+    if self.neighbors
+        output_stri = output_stri * "n"
+    end
+
+    if self.nobound
+        output_stri = output_stri * "B"
+    end
+
+    if self.nopolywritten
+        output_stri = output_stri * "P"
+    end
+
+    if self.nonodewritten
+        output_stri = output_stri * "N"
+    end
+
+    if self.noelewritten
+        output_stri = output_stri * "E"
+    end
+
+    if self.noiterationnum
+        output_stri = output_stri * "I"
+    end
+
+    if self.noholes
+        output_stri = output_stri * "O"
+    end
+
+    if self.noexactaritmetic
+        output_stri = output_stri * "X"                                                
+    end
+
+    if self.order && self.orderHow > 0
+        output_stri = output_stri * "o" * string(self.orderHow) 
+    end    
+
+    if self.dwyer
+        output_stri = output_stri * "l"
+    end
+
+    if self.docheck
+        output_stri = output_stri * "C"
+    end
+
+    if self.quiet
+        output_stri = output_stri * "Q"                                                
+    end
+
+    if self.verbose
+        output_stri = output_stri * "V"                                                
+    end
+
+    return output_stri
 end
