@@ -49,6 +49,7 @@ function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vecto
   # Clean C
   inTri.pointlist = C_NULL
   inTri.pointmarkerlist = C_NULL
+
   tupleRes[1].trianglelist = C_NULL
 
   return triangleList
