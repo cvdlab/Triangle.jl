@@ -6,8 +6,9 @@ include("trioptions.jl")
 depsjl = joinpath(dirname(@__FILE__), "../..", "deps", "deps.jl")
 include(depsjl)
 
-export basic_triangulation
 export TriangulateOptions
+export basic_triangulation
+export constrained_triangulation
 
 function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions)
   # Basic Tri
@@ -22,9 +23,36 @@ function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint
   triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
   tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
   
+  # Clean C
+  inTri.pointlist = C_NULL
+  inTri.pointmarkerlist = C_NULL
   tupleRes[1].trianglelist = C_NULL
 
   return triangleList
+end
+
+function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions)
+  # Basic Tri
+  inTri = TriangulateIO()  
+  inTri.pointlist = pointer(vertices)
+  inTri.numberofpoints = length(verticesMap)
+  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri.segmentlist = pointer(edges)
+  inTri.numberofsegments = Int(length(edges)/2)
+
+  # Call C
+  tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
+  
+  triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
+  tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
+  
+  # Clean C
+  inTri.pointlist = C_NULL
+  inTri.pointmarkerlist = C_NULL
+  tupleRes[1].trianglelist = C_NULL
+
+  return triangleList
+
 end
 
 function ctriangulate(inTri::TriangulateIO, options::String)
