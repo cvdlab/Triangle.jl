@@ -41,6 +41,7 @@
 =#
 
 type TriangulateOptions
+    pslg::Bool #p
     regionattrib::Bool # A
     convex::Bool # c
     jettison::Bool # j
@@ -58,17 +59,25 @@ type TriangulateOptions
     order::Bool # o
     orderHow::Int64 # 1...2...3
     dwyer::Bool # l
-    docheck::Bool # C
     quiet::Bool # Q
     verbose::Bool # V
-    TriangulateOptions() = new(false, false, false, false, false, false, false, 
-    true, true, true, false, true, false, false, 
+    TriangulateOptions() = new(false, 
+    false, false, false, false, false, false, false,
+    # No_xyz_ selector(s)
+    true, true, false, false, true, false, false, 
+    # order
     false, 0, 
-    false, false, true, false)
+    false, 
+    # Quiet Verbose
+    true, false)
 end
 
 function getTriangulateStringOptions(self::TriangulateOptions)
     output_stri = ""
+
+    if self.pslg
+        output_stri = output_stri * "p"
+    end
 
     if self.regionattrib
         output_stri = output_stri * "A"
@@ -132,10 +141,6 @@ function getTriangulateStringOptions(self::TriangulateOptions)
 
     if self.dwyer
         output_stri = output_stri * "l"
-    end
-
-    if self.docheck
-        output_stri = output_stri * "C"
     end
 
     if self.quiet

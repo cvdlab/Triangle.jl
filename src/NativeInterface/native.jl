@@ -9,6 +9,7 @@ include(depsjl)
 export TriangulateOptions
 export basic_triangulation
 export constrained_triangulation
+export constrained_triangulation_bounded
 
 function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
@@ -18,17 +19,7 @@ function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint
   inTri.pointmarkerlist = pointer(verticesMap)
 
   # Call C
-  tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
-  
-  triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
-  tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
-  
-  # Clean C
-  inTri.pointlist = C_NULL
-  inTri.pointmarkerlist = C_NULL
-  tupleRes[1].trianglelist = C_NULL
-
-  return triangleList
+  return calculate_output(inTri, options)
 end
 
 function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
@@ -41,6 +32,25 @@ function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vecto
   inTri.numberofsegments = Int(length(edges)/2)
 
   # Call C
+  return calculate_output(inTri, options)
+end
+
+function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, boundary_edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
+  # Basic Tri
+  inTri = TriangulateIO()  
+  inTri.pointlist = pointer(vertices)
+  inTri.numberofpoints = length(verticesMap)
+  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri.segmentlist = pointer(edges)
+  inTri.numberofsegments = Int(length(edges)/2)
+  inTri.segmentmarkerlist = pointer(boundary_edges)
+
+  # Call C
+  return calculate_output(inTri, options)
+end
+
+function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
+  # Call C
   tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
   
   triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
@@ -53,7 +63,6 @@ function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vecto
   tupleRes[1].trianglelist = C_NULL
 
   return triangleList
-
 end
 
 function ctriangulate(inTri::TriangulateIO, options::String)

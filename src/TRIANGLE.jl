@@ -16,13 +16,12 @@ function basic_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int
   Triangulate.basic_triangulation(vertices, vertices_map)
 end
 
-#=
-point = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
-point_map = Array{Int64,1}(collect(1:1:size(point)[1]))
-edge_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
-=#
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
   Triangulate.constrained_triangulation(vertices, vertices_map, edges_list)
+end
+
+function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
+  Triangulate.constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary)
 end
 
 end

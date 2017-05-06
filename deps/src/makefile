@@ -10,7 +10,7 @@ RM=rm -f
 # target lib
 TARGET_LIB=libtriangle.so 
 # Tridef
-CFLAGS+=-DTRILIBRARY -DREDUCED -DCDT_ONLY
+CFLAGS+=-DTRILIBRARY -DREDUCED -DCDT_ONLY -DNO_TIMER
 
 # source files
 SRCS=tricall.c triangle.c 
