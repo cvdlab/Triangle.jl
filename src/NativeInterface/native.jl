@@ -13,10 +13,7 @@ export constrained_triangulation_bounded
 
 function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
-  inTri = TriangulateIO()  
-  inTri.pointlist = pointer(vertices)
-  inTri.numberofpoints = length(verticesMap)
-  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri = generate_basic_input(vertices, verticesMap)
 
   # Call C
   return calculate_output(inTri, options)
@@ -24,10 +21,7 @@ end
 
 function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
-  inTri = TriangulateIO()  
-  inTri.pointlist = pointer(vertices)
-  inTri.numberofpoints = length(verticesMap)
-  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri = generate_basic_input(vertices, verticesMap)
   inTri.segmentlist = pointer(edges)
   inTri.numberofsegments = Int(length(edges)/2)
 
@@ -37,16 +31,23 @@ end
 
 function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, boundary_edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
-  inTri = TriangulateIO()  
-  inTri.pointlist = pointer(vertices)
-  inTri.numberofpoints = length(verticesMap)
-  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri = generate_basic_input(vertices, verticesMap)
   inTri.segmentlist = pointer(edges)
   inTri.numberofsegments = Int(length(edges)/2)
   inTri.segmentmarkerlist = pointer(boundary_edges)
 
   # Call C
   return calculate_output(inTri, options)
+end
+
+function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint},)
+  # Basic Tri
+  inTri = TriangulateIO()  
+  inTri.pointlist = pointer(vertices)
+  inTri.numberofpoints = length(verticesMap)
+  inTri.pointmarkerlist = pointer(verticesMap)
+
+  return inTri
 end
 
 function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
