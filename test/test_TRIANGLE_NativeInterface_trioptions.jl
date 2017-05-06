@@ -1,13 +1,13 @@
 include("../src/NativeInterface/trioptions.jl")
 
 @testset "TRIANGLE.NativeInterface.TriangulateOptions" begin
-    @testset "TriangulateOptions" begin
-        @testset "getTriangulateStringOptions() Default" begin
+    @testset "getTriangulateStringOptions()" begin
+        @testset "Default" begin
             opt = TriangulateOptions()
             @test getTriangulateStringOptions(opt) == "BPIQ"
         end
 
-        @testset "getTriangulateStringOptions() All disable" begin
+        @testset "All disable" begin
             opt = TriangulateOptions()
             opt.nobound = false
             opt.nopolywritten = false
@@ -16,7 +16,7 @@ include("../src/NativeInterface/trioptions.jl")
             @test getTriangulateStringOptions(opt) == ""
         end        
 
-        @testset "getTriangulateStringOptions() All enable" begin
+        @testset "All enable" begin
             opt = TriangulateOptions()
             opt.pslg = true
             opt.regionattrib = true
