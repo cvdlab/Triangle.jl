@@ -64,7 +64,7 @@ type TriangulateOptions
     TriangulateOptions() = new(false, false, false, false, false, false, false, 
     true, true, true, false, true, false, false, 
     false, 0, 
-    false, false, false, false)
+    false, false, true, false)
 end
 
 function getTriangulateStringOptions(self::TriangulateOptions)

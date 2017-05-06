@@ -10,7 +10,7 @@ export TriangulateOptions
 export basic_triangulation
 export constrained_triangulation
 
-function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions)
+function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
   inTri = TriangulateIO()  
   inTri.pointlist = pointer(vertices)
@@ -31,7 +31,7 @@ function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint
   return triangleList
 end
 
-function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions)
+function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
   inTri = TriangulateIO()  
   inTri.pointlist = pointer(vertices)
