@@ -1,6 +1,3 @@
-using Base.Test
-include("../src/TRIANGLE.jl")
-
 @testset "TRIANGLE" begin
     points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
     @testset "basic_triangulation" begin
@@ -11,7 +8,7 @@ include("../src/TRIANGLE.jl")
     @testset "basic_triangulation" begin
         @test TRIANGLE.basic_triangulation(points,points_map)[1] == points
     end
-
+end
 
 #=
 # Costrained
@@ -29,4 +26,3 @@ edge_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
 edge_boundary = [false, false, true, true, false, false]
 TRIANGLE.constrained_triangulation(point, point_map, edge_list, edge_boundary)
 =#
-end
