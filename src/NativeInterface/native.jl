@@ -1,10 +1,8 @@
 module NativeInterface
 
-include("trinative.jl")
-include("trioptions.jl")
-
-depsjl = joinpath(dirname(@__FILE__), "../..", "deps", "deps.jl")
-include(depsjl)
+include("triangle_structure.jl")
+include("options_structure.jl")
+include("native_calls.jl")
 
 export TriangulateOptions
 export basic_triangulation
@@ -64,19 +62,6 @@ function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
   tupleRes[1].trianglelist = C_NULL
 
   return triangleList
-end
-
-function ctriangulate(inTri::TriangulateIO, options::String)
-  outTri = TriangulateIO()
-  voronoiTri = TriangulateIO()
-  ccall(
-    (:call_triangulate, libtriangle), 
-    Void, 
-    (Ptr{UInt8}, Ref{TriangulateIO}, Ref{TriangulateIO}, Ref{TriangulateIO}), 
-    options, Ref(inTri), Ref(outTri), Ref(voronoiTri)
-  )
-
-  (outTri, voronoiTri)
 end
 
 end

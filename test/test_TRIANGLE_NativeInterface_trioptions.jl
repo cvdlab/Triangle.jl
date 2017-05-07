@@ -1,4 +1,4 @@
-include("../src/NativeInterface/trioptions.jl")
+include("../src/NativeInterface/options_structure.jl")
 
 @testset "TRIANGLE.NativeInterface.TriangulateOptions" begin
     @testset "getTriangulateStringOptions()" begin
