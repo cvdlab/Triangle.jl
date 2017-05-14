@@ -58,6 +58,7 @@ dkms.conf
 deps/deps.jl
 deps/usr/**/*.h
 deps/usr/**/*.c
+docs/build
 
 # Mac
 .DS_Store

@@ -358,5 +358,5 @@ function map_to_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1
 
   return triangle_list_vertices
 end
-+
+
 end
