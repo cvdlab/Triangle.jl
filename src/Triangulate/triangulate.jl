@@ -6,14 +6,10 @@ include("utils_methods.jl")
 export basic_triangulation
 export constrained_triangulation
 
-function basic_triangulation(vertices::Array{Float64,2})
-    return basic_triangulation(vertices, Array{Int64,1}(collect(1:1:size(vertices)[1])))
-end
-
 function basic_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1})
     flat_triangle_list = call_basic_triangulation(flat_vertices(vertices), Vector{Cint}(vertices_map))
     
-    return triangle_list_from_marker(vertices, vertices_map, flat_triangle_list)
+    return triangle_list_from_marker(flat_triangle_list)
 end
 
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
@@ -27,7 +23,7 @@ function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Arr
                 Vector{Cint}(vertices_map), 
                 flat_edges(edges_list)
             )
-        return triangle_list_from_marker(vertices, vertices_map, flat_triangle_list)
+        return triangle_list_from_marker(flat_triangle_list)
     else
         flat_triangle_list = call_constrained_triangulation_bounded(
                 flat_vertices(vertices), 
@@ -35,7 +31,7 @@ function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Arr
                 flat_edges(edges_list),
                 Vector{Cint}(map(x -> x ? 1 : 0, edges_boundary))
             )
-        return triangle_list_from_marker(vertices, vertices_map, flat_triangle_list)
+        return triangle_list_from_marker(flat_triangle_list)
     end
 end
 
