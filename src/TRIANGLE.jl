@@ -329,6 +329,7 @@ julia> constrained_triangulation_vertices(points,points_map,edges_list,edge_boun
  [0.0 0.0; 1.0 1.0; 0.0 3.0]
  [1.0 1.0; 0.0 0.0; 2.0 0.0]
  [0.0 3.0; 1.0 1.0; 1.0 3.0]
+ [2.0 1.0; 1.0 1.0; 2.0 0.0]
 ```
 """
 function constrained_triangulation_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
