@@ -3,6 +3,10 @@ language: julia
 os:
   - linux
 
+branches:
+  only:
+  - master
+  
 julia:
   - 0.5
 
