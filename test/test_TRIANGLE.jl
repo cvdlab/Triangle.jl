@@ -53,3 +53,8 @@
         end                 
     end
 end
+
+## Strange case (TRIFORCE)
+# a = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
+# map = [1,2,3,4,5,6] => works
+# map = [1,2,4,3,5,6] => WTF

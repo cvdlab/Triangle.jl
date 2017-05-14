@@ -9,11 +9,13 @@ function triangle_list_from_marker(flat_triangle_list)
     return triangle_list
 end
 
-function flat_vertices(vertices::Array{Float64,2})
+function flat_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1})
     vert_size = size(vertices)
     flat_vertices_vector = Vector{Cdouble}(vert_size[1]*vert_size[2])
-
+    
+    # for vert_id in vertices_map
     for vert_id=1:vert_size[1]
+        print(vert_id)
         flat_vertices_vector[(vert_id*2)-1]=vertices[vert_id]
         flat_vertices_vector[(vert_id*2)]=vertices[vert_id+vert_size[1]]
     end

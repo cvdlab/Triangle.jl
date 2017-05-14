@@ -12,6 +12,12 @@ export constrained_triangulation_bounded
 function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
   # Basic Tri
   inTri = generate_basic_input(vertices, verticesMap)
+  #inTri.holelist = pointer(Vector{Cdouble}([2., 4.]))
+  options.nopolywritten = false
+  options.nobound = false
+  # options.pslg = true
+  options.quiet = false
+  options.verbose = true
 
   # Call C
   return calculate_output(inTri, options)
@@ -38,8 +44,10 @@ function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMa
   return calculate_output(inTri, options)
 end
 
-function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint},)
+function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint})
   # Basic Tri
+  print(vertices)
+  print(verticesMap)
   inTri = TriangulateIO()  
   inTri.pointlist = pointer(vertices)
   inTri.numberofpoints = length(verticesMap)
@@ -52,6 +60,11 @@ function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
   # Call C
   tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
   
+  print( unsafe_wrap(Array, tupleRes[1].pointlist, tupleRes[1].numberofpoints * 2, false) )
+
+  print( unsafe_wrap(Array, tupleRes[1].pointmarkerlist, tupleRes[1].numberofpoints, false) )  
+
+  print(tupleRes[1])
   triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
   tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
   
@@ -61,6 +74,7 @@ function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
 
   tupleRes[1].trianglelist = C_NULL
 
+  print(triangleList)
   return triangleList
 end
 
