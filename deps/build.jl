@@ -13,18 +13,16 @@ isfile("deps.jl") && rm("deps.jl")
 
     if is_windows()
         libfile = joinpath(libdir, "libtriangle.dll")
-        userdit = ENV["USERPROFILE"]
-        vcpython="AppData\\Local\\Programs\\Common\\Microsoft\\Visual\ C++\ for\ Python\\9.0\\vcvarsall.bat"
         @build_steps begin
             FileRule(libfile, @build_steps begin
                  BinDeps.run(@build_steps begin
                     ChangeDirectory(srcdir)
-                    `$userdit\\$vcpython & nmake -f makefile.win clean & nmake -f makefile.win`
+                    `cmd /c compile.bat all`
                     `cmd /c copy libtriangle.dll $libfile`
                     `cmd /c copy triangle.h $headerdir`
                     `cmd /c copy tricall.h $headerdir`
                     `cmd /c copy commondefine.h $headerdir`
-                    `$userdit\\$vcpython & nmake -f makefile.win clean`
+                    `cmd /c compile.bat clean`
             end) end) end
 
         provides(Binaries, URI(libfile), libtriangle)
