@@ -1,35 +1,38 @@
 #=
 /* Switches for the triangulator.                                            */
-/*   poly: -p switch.  refine: -r switch.                                    */
-/*   quality: -q switch.                                                     */
-/*     minangle: minimum angle bound, specified after -q switch.             */
-/*     goodangle: cosine squared of minangle.                                */
-/*     offconstant: constant used to place off-center Steiner points.        */
-/*   vararea: -a switch without number.                                      */
-/*   fixedarea: -a switch with number.                                       */
-/*     maxarea: maximum area bound, specified after -a switch.               */
-/*   usertest: -u switch.                                                    */
-/*   regionattrib: -A switch.  convex: -c switch.                            */
-/*   weighted: 1 for -w switch, 2 for -W switch.  jettison: -j switch        */
-/*   firstnumber: inverse of -z switch.  All items are numbered starting     */
-/*     from `firstnumber'.                                                   */
-/*   edgesout: -e switch.  voronoi: -v switch.                               */
-/*   neighbors: -n switch.  geomview: -g switch.                             */
-/*   nobound: -B switch.  nopolywritten: -P switch.                          */
-/*   nonodewritten: -N switch.  noelewritten: -E switch.                     */
-/*   noiterationnum: -I switch.  noholes: -O switch.                         */
-/*   noexact: -X switch.                                                     */
-/*   order: element order, specified after -o switch.                        */
-/*   nobisect: count of how often -Y switch is selected.                     */
-/*   steiner: maximum number of Steiner points, specified after -S switch.   */
-/*   incremental: -i switch.  sweepline: -F switch.                          */
-/*   dwyer: inverse of -l switch.                                            */
-/*   splitseg: -s switch.                                                    */
-/*   conformdel: -D switch.  docheck: -C switch.                             */
-/*   quiet: -Q switch.  verbose: count of how often -V switch is selected.   */
-/*   usesegments: -p, -r, -q, or -c switch; determines whether segments are  */
-/*     used at all.                                                          */
-/* 
+
+-p Triangulates a Planar Straight Line Graph (.poly file).
+-r Refines a previously generated mesh.
+-q Quality mesh generation with no angles smaller than 20 degrees. An alternate minimum angle may be specified after the `q'.
+-a Imposes a maximum triangle area constraint. A fixed area constraint (that applies to every triangle) may be specified after the `a', or varying area constraints may be read from a .poly file or .area file.
+-u Imposes a user-defined constraint on triangle size.
+-A Assigns a regional attribute to each triangle that identifies what segment-bounded region it belongs to.
+-c Encloses the convex hull with segments.
+-D Conforming Delaunay: use this switch if you want all triangles in the mesh to be Delaunay, and not just constrained Delaunay; or if you want to ensure that all Voronoi vertices lie within the triangulation.
+-j Jettisons vertices that are not part of the final triangulation from the output .node file (including duplicate input vertices and vertices ``eaten'' by holes).
+-e Outputs (to an .edge file) a list of edges of the triangulation.
+-v Outputs the Voronoi diagram associated with the triangulation. Does not attempt to detect degeneracies, so some Voronoi vertices may be duplicated.
+-n Outputs (to a .neigh file) a list of triangles neighboring each triangle.
+-g Outputs the mesh to an Object File Format (.off) file, suitable for viewing with the Geometry Center's Geomview package.
+-B Suppresses boundary markers in the output .node, .poly, and .edge output files.
+-P Suppresses the output .poly file. Saves disk space, but you lose the ability to maintain constraining segments on later refinements of the mesh.
+-N Suppresses the output .node file.
+-E Suppresses the output .ele file.
+-I Suppresses mesh iteration numbers.
+-O Suppresses holes: ignores the holes in the .poly file.
+-X Suppresses exact arithmetic.
+-z Numbers all items starting from zero (rather than one). Note that this switch is normally overrided by the value used to number the first vertex of the input .node or .poly file. However, this switch is useful when calling Triangle from another program.
+-o2 Generates second-order subparametric elements with six nodes each.
+-Y Prohibits the insertion of Steiner points on the mesh boundary. If specified twice (-YY), it prohibits the insertion of Steiner points on any segment, including internal segments.
+-S Specifies the maximum number of added Steiner points.
+-i Uses the incremental algorithm for Delaunay triangulation, rather than the divide-and-conquer algorithm.
+-F Uses Steven Fortune's sweepline algorithm for Delaunay triangulation, rather than the divide-and-conquer algorithm.
+-l Uses only vertical cuts in the divide-and-conquer algorithm. By default, Triangle uses alternating vertical and horizontal cuts, which usually improve the speed except with vertex sets that are small or short and wide. This switch is primarily of theoretical interest.
+-s Specifies that segments should be forced into the triangulation by recursively splitting them at their midpoints, rather than by generating a constrained Delaunay triangulation. Segment splitting is true to Ruppert's original algorithm, but can create needlessly small triangles. This switch is primarily of theoretical interest.
+-C Check the consistency of the final mesh. Uses exact arithmetic for checking, even if the -X switch is used. Useful if you suspect Triangle is buggy.
+-Q Quiet: Suppresses all explanation of what Triangle is doing, unless an error occurs.
+-V Verbose: Gives detailed information about what Triangle is doing. Add more `V's for increasing amount of detail. `-V' gives information on algorithmic progress and detailed statistics.
+-h Help: Displays complete instructions.
 
 /*  If the size of the object file is important to you, you may wish to      */
 /*  generate a reduced version of triangle.o.  The REDUCED symbol gets rid   */
@@ -37,7 +40,7 @@
 /*  the -DREDUCED switch eliminates Triangle's -i, -F, -s, and -C switches.  */
 /*  The CDT_ONLY symbol gets rid of all meshing algorithms above and beyond  */
 /*  constrained Delaunay triangulation.  Specifically, the -DCDT_ONLY switch */
-/*  eliminates Triangle's -r, -q, -a, -u, -D, -Y, -S, and -s switches.       */                                                                          */
+/*  eliminates Triangle's -r, -q, -a, -u, -D, -Y, -S, and -s switches.       */
 =#
 
 type TriangulateOptions
