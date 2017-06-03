@@ -18,6 +18,13 @@
             @test TRIANGLE.basic_triangulation_vertices(points,points_map)[1] == points
         end
 
+        @testset "basic_triangulation with unordered point map" begin
+            points = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
+            points_map = [1, 2, 4, 3, 5, 6]
+            result_tri = [[1, 2, 4],[4, 2, 5],[5, 6, 4],[3, 5, 2]]
+            @test TRIANGLE.basic_triangulation(points,points_map) == result_tri
+        end        
+
         @testset "constrained_triangulation" begin
             points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
             points_map = Array{Int64,1}(collect(1:1:size(points)[1]))

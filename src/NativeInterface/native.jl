@@ -2,6 +2,7 @@ module NativeInterface
 
 include("triangle_structure.jl")
 include("options_structure.jl")
+include("native_remapper.jl")
 include("native_calls.jl")
 
 export TriangulateOptions
@@ -10,61 +11,54 @@ export constrained_triangulation
 export constrained_triangulation_bounded
 
 function basic_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
-  # Basic Tri
-  inTri = generate_basic_input(vertices, verticesMap)
-  #inTri.holelist = pointer(Vector{Cdouble}([2., 4.]))
-  options.nopolywritten = false
-  options.nobound = false
-  # options.pslg = true
-  options.quiet = false
-  options.verbose = true
-
   # Call C
-  return calculate_output(inTri, options)
+  return calculate_output(generate_basic_input(vertices, verticesMap), options)
 end
 
 function constrained_triangulation(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
-  # Basic Tri
-  inTri = generate_basic_input(vertices, verticesMap)
-  inTri.segmentlist = pointer(edges)
-  inTri.numberofsegments = Int(length(edges)/2)
 
   # Call C
-  return calculate_output(inTri, options)
+  return calculate_output(generate_basic_input(vertices, verticesMap, edges), options)
 end
 
 function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, boundary_edges::Vector{Cint}, options::TriangulateOptions = TriangulateOptions())
-  # Basic Tri
-  inTri = generate_basic_input(vertices, verticesMap)
-  inTri.segmentlist = pointer(edges)
-  inTri.numberofsegments = Int(length(edges)/2)
-  inTri.segmentmarkerlist = pointer(boundary_edges)
-
   # Call C
-  return calculate_output(inTri, options)
+  return calculate_output(generate_basic_input(vertices, verticesMap, edges, boundary_edges), options)
 end
 
-function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint})
+function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint} = Vector{Cint}(), boundary_edges::Vector{Cint} = Vector{Cint}())
   # Basic Tri
-  print(vertices)
-  print(verticesMap)
+  # println(vertices)
+  # println(verticesMap)
+
+  mapTri = trimap_to_native(verticesMap, edges)
+
   inTri = TriangulateIO()  
   inTri.pointlist = pointer(vertices)
-  inTri.numberofpoints = length(verticesMap)
-  inTri.pointmarkerlist = pointer(verticesMap)
+  inTri.numberofpoints = length(mapTri.remappedVerticesMarkers)
+  inTri.pointmarkerlist = pointer(mapTri.remappedVerticesMarkers)
+  if length(edges) > 0
+    inTri.segmentlist = pointer(mapTri.remappedEdgesList)
+    inTri.numberofsegments = Int(length(mapTri.remappedEdgesList)/2)
+  end
+  if length(edges) > 0 && length(boundary_edges) > 0
+    inTri.segmentmarkerlist = pointer(boundary_edges)  
+  end
 
-  return inTri
+  return (inTri, mapTri)
 end
 
-function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
+function calculate_output(inputTriData::Tuple{TriangulateIO,TriangulateInputMapper}, options::TriangulateOptions)
+  inTri = inputTriData[1]
+  mapTri = inputTriData[2]
+  
   # Call C
   tupleRes = ctriangulate(inTri, getTriangulateStringOptions(options))
   
-  print( unsafe_wrap(Array, tupleRes[1].pointlist, tupleRes[1].numberofpoints * 2, false) )
+  # println( unsafe_wrap(Array, tupleRes[1].pointlist, tupleRes[1].numberofpoints * 2, false) )
+  # println( unsafe_wrap(Array, tupleRes[1].pointmarkerlist, tupleRes[1].numberofpoints, false) )  
+  # println(tupleRes[1])
 
-  print( unsafe_wrap(Array, tupleRes[1].pointmarkerlist, tupleRes[1].numberofpoints, false) )  
-
-  print(tupleRes[1])
   triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
   tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
   
@@ -74,8 +68,9 @@ function calculate_output(inTri::TriangulateIO, options::TriangulateOptions)
 
   tupleRes[1].trianglelist = C_NULL
 
-  print(triangleList)
-  return triangleList
+  # println(triangleList)
+
+  return trimap_from_native(mapTri, triangleList)
 end
 
 end
