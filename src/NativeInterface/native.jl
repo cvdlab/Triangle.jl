@@ -26,7 +26,12 @@ function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMa
   return calculate_output(generate_basic_input(vertices, verticesMap, edges, boundary_edges), options)
 end
 
-function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint} = Vector{Cint}(), boundary_edges::Vector{Cint} = Vector{Cint}())
+function constrained_triangulation_bounded(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint}, boundary_edges::Vector{Cint}, holes::Vector{Cdouble}, options::TriangulateOptions = TriangulateOptions())
+  # Call C
+  return calculate_output(generate_basic_input(vertices, verticesMap, edges, boundary_edges, holes), options)
+end
+
+function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cint}, edges::Vector{Cint} = Vector{Cint}(), boundary_edges::Vector{Cint} = Vector{Cint}(), holes::Vector{Cdouble} = Vector{Cdouble}())
   # Basic Tri
   # println(vertices)
   # println(verticesMap)
@@ -43,6 +48,10 @@ function generate_basic_input(vertices::Vector{Cdouble}, verticesMap::Vector{Cin
   end
   if length(edges) > 0 && length(boundary_edges) > 0
     inTri.segmentmarkerlist = pointer(boundary_edges)  
+  end
+  if length(holes) > 0
+    inTri.holelist = pointer(holes)
+    inTri.numberofholes = Int(length(holes)/2)
   end
 
   return (inTri, mapTri)
