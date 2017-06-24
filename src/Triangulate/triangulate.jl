@@ -17,7 +17,7 @@ function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Arr
 end
 
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
-    return constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary, Array{Float64,2}())
+    return constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary, Array{Float64,2}(0,0))
 end
 
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1}, holes::Array{Float64,2})
