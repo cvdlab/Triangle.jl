@@ -336,10 +336,6 @@ function constrained_triangulation_vertices(vertices::Array{Float64,2}, vertices
   map_to_vertices( vertices, vertices_map, constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary) )
 end
 
-function constrained_triangulation_vertices_boundary(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
-  map_to_vertices( vertices, vertices_map, constrained_triangulation(vertices, vertices_map, edges_list, fill(true, size(edges_list)[1]) ) )
-end
-
 """
     constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1}, holes::Array{Float64,2})
 
