@@ -6,7 +6,11 @@ os:
 branches:
   only:
   - master
-  
+
+addons:
+  apt:
+    update: true
+
 julia:
   - 0.5
   - 0.6
