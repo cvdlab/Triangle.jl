@@ -1,4 +1,10 @@
 push!(LOAD_PATH,"../src/")
 using Documenter, TRIANGLE
 
-makedocs()
+makedocs(
+	format = :html,
+	sitename = "TRIANGLE.jl",
+	pages = [
+		"Home" => "index.md"
+	]
+)
