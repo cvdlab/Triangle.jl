@@ -7,9 +7,6 @@
 
 A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
 
-### Version
-0.2.1
-
 ### Library notes
 At the moment the library will use only CDT, planning to expand later.
 
