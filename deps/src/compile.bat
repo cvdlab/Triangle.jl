@@ -1,5 +1,19 @@
 @echo off
 
+if "%2" == "" goto x64
+if "%2" == "x64" goto x64
+if "%2" == "x86" goto x86
+
+:x64
+call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+goto parsebuild
+
+:x86
+call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
+goto parsebuild
+
+:parsebuild
 if "%1" == "" goto all
 
 if /i %1 == all       goto all
