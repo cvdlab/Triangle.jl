@@ -15,7 +15,7 @@ isfile("deps.jl") && rm("deps.jl")
         libfile = joinpath(libdir, "libtriangle.dll")
         arch = "x86"
         if Sys.WORD_SIZE == 64
-            arch = "x86_amd64"
+            arch = "x64"
         end
         @build_steps begin
             FileRule(libfile, @build_steps begin
