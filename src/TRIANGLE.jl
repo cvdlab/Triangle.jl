@@ -13,19 +13,21 @@ include("common.jl")
 """
     basic_triangulation_vertices(vertices::Array{Float64,2})
 
-Compute a Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_
+Compute a Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]`
 
 The function will return an array of array of 3-vertices lists (triangles with the correct vertices order) using the vertex coordinates in each triangle definition.
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
  0.0  0.0
  1.0  0.0
  0.0  1.0
 
-julia> basic_triangulation_vertices(points)
+julia> TRIANGLE.basic_triangulation_vertices(points)
 1-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 0.0; 0.0 1.0]
 ```
@@ -37,7 +39,7 @@ end
 """
     basic_triangulation(vertices::Array{Float64,2},vertices_map::Array{Int64,1})
 
-Compute a Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_
+Compute a Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]`
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
@@ -46,6 +48,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
  0.0  0.0
@@ -58,9 +62,9 @@ julia> points_map = [1, 2, 3]
  2
  3
 
-julia> basic_triangulation(points,points_map)
+julia> TRIANGLE.basic_triangulation(points,points_map)
 1-element Array{Array{Int64,1},1}:
- [1,2,3]
+ [1, 2, 3]
 ```
 """
 function basic_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1})
@@ -71,7 +75,7 @@ end
 """
     basic_triangulation_vertices(vertices::Array{Float64,2},vertices_map::Array{Int64,1})
 
-Compute a Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_
+Compute a Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]`
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
@@ -79,6 +83,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE 
+
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
  0.0  0.0
@@ -91,7 +97,7 @@ julia> points_map = [1, 2, 3]
  2
  3
 
-julia> basic_triangulation_vertices(points,points_map)
+julia> TRIANGLE.basic_triangulation_vertices(points,points_map)
 1-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 0.0; 0.0 1.0]
 ```
@@ -103,17 +109,19 @@ end
 """
     constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edges (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edges (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 The function will return an array of array of 3-vertices lists (triangles with the correct vertices order) using the vertex identifiers in each triangle definition.
 
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -141,13 +149,12 @@ julia> edges_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
  5  6
  6  1
 
-julia> constrained_triangulation(points,points_map,edges_list)
-5-element Array{Array{Int64,1},1}:
- [1,4,2]
- [4,1,6]
- [2,4,3]
- [4,5,3]
- [5,4,6]
+julia> TRIANGLE.constrained_triangulation(points,points_map,edges_list)
+4-element Array{Array{Int64,1},1}:
+ [1, 4, 2]
+ [4, 1, 6]
+ [2, 4, 3]
+ [5, 4, 6]
 ```
 """
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
@@ -157,17 +164,19 @@ end
 """
     constrained_triangulation_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edges (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edges (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 The function will return an array of array of 3-vertices lists (triangles with the correct vertices order) using the vertex coordinates in each triangle definition.
 
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -195,12 +204,11 @@ julia> edges_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
  5  6
  6  1
 
-julia> constrained_triangulation_vertices(points,points_map,edges_list)
-5-element Array{Array{Float64,2},1}:
+julia> TRIANGLE.constrained_triangulation_vertices(points,points_map,edges_list)
+4-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 1.0; 0.0 3.0]
  [1.0 1.0; 0.0 0.0; 2.0 0.0]
  [0.0 3.0; 1.0 1.0; 1.0 3.0]
- [1.0 1.0; 2.0 1.0; 1.0 3.0]
  [2.0 1.0; 1.0 1.0; 2.0 0.0]
 ```
 """
@@ -211,11 +219,11 @@ end
 """
     constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 A list of boundary markers passed in `edges_boundary` in the form of booleans that tell the triangulator if the edge is on the boundary or not (the indexing is the same of `edges_list`).
 
@@ -224,6 +232,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -260,12 +270,12 @@ julia> edge_boundary = [false, false, true, true, false, false]
  false
  false
 
-julia> constrained_triangulation(points,points_map,edges_list,edge_boundary)
+julia> TRIANGLE.constrained_triangulation(points,points_map,edges_list,edge_boundary)
 4-element Array{Array{Int64,1},1}:
- [1,4,2]
- [4,1,6]
- [2,4,3]
- [5,4,6]
+ [1, 4, 2]
+ [4, 1, 6]
+ [2, 4, 3]
+ [5, 4, 6]
 ```
 """
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
@@ -275,11 +285,11 @@ end
 """
     constrained_triangulation_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 A list of boundary markers passed in `edges_boundary` in the form of booleans that tell the triangulator if the edge is on the boundary or not (the indexing is the same of `edges_list`).
 
@@ -288,6 +298,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -324,7 +336,7 @@ julia> edge_boundary = [false, false, true, true, false, false]
  false
  false
 
-julia> constrained_triangulation_vertices(points,points_map,edges_list,edge_boundary)
+julia> TRIANGLE.constrained_triangulation_vertices(points,points_map,edges_list,edge_boundary)
 4-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 1.0; 0.0 3.0]
  [1.0 1.0; 0.0 0.0; 2.0 0.0]
@@ -339,13 +351,13 @@ end
 """
     constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1}, holes::Array{Float64,2})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
 
 A list of `holes` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ can be passed to avoid triangulation in that part of the mesh.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 A list of boundary markers passed in `edges_boundary` in the form of booleans that tell the triangulator if the edge is on the boundary or not (the indexing is the same of `edges_list`).
 
@@ -354,6 +366,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -400,7 +414,7 @@ julia> holes = [4. 2.]
 1×2 Array{Float64,2}:
  4.0  2.0
 
-julia> constrained_triangulation(points, points_map, edges_list, edge_boundary, holes)
+julia> TRIANGLE.constrained_triangulation(points, points_map, edges_list, edge_boundary, holes)
 3-element Array{Array{Int64,1},1}:
  [1,2,3]
  [5,6,3]
@@ -414,13 +428,13 @@ end
 """
     constrained_triangulation_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1}, holes::Array{Float64,2})
 
-Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
+Compute a Constrained Delaunay triangulation for a list of `vertices` in the form of `[x1 y1; x2 y2; ... ; xn yn]` and a list of edges that will be kept. Some of those edges can be marked as the boundary of the mesh.
 
 A list of `holes` in the form of _[x1 y1; x2 y2; ... ; xn yn]_ can be passed to avoid triangulation in that part of the mesh.
 
 A list of indexes is provided in `vertices_map` so that each vertex can have a custom integer identifier.
 
-A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of _[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]_
+A list of edge (to be included in the final triangulation) is passed in `edges_list` in the form of `[ vertex-identifier-1 vertex-identifier-2; vertex-identifier-1 vertex-identifier-3; ... ; vertex-identifier-N vertex-identifier-M ]`
 
 A list of boundary markers passed in `edges_boundary` in the form of booleans that tell the triangulator if the edge is on the boundary or not (the indexing is the same of `edges_list`).
 
@@ -429,6 +443,8 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
+julia> using TRIANGLE
+
 julia> points = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
 6×2 Array{Float64,2}:
  0.0  0.0
@@ -475,7 +491,7 @@ julia> holes = [4. 2.]
 1×2 Array{Float64,2}:
  4.0  2.0
 
-julia> constrained_triangulation_vertices(points, points_map, edges_list, edge_boundary, holes)
+julia> TRIANGLE.constrained_triangulation_vertices(points, points_map, edges_list, edge_boundary, holes)
 3-element Array{Array{Float64,2},1}:
  [0.0 0.0; 4.0 0.0; 2.0 3.0]
  [6.0 3.0; 4.0 6.0; 2.0 3.0]

@@ -43,7 +43,7 @@
 /*  eliminates Triangle's -r, -q, -a, -u, -D, -Y, -S, and -s switches.       */
 =#
 
-type TriangulateOptions
+mutable struct TriangulateOptions
     pslg::Bool #p
     regionattrib::Bool # A
     convex::Bool # c

@@ -1,7 +1,8 @@
 # TRIANGLE.jl Documentation
 
-```@contents
-```
+A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
+
+The library builds the C version and then expose methods to calculate CDTs.
 
 ## Functions
 

@@ -1,6 +1,6 @@
 The TRIANGLE.jl package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2017:
+> Copyright (c) 2017-2018:
 >  * Francesco Furiani
 > 
 > Permission is hereby granted, free of charge, to any person obtaining a copy

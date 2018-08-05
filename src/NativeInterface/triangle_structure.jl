@@ -1,6 +1,6 @@
 # REAL = double = Cdouble
 
-type TriangulateIO
+mutable struct TriangulateIO
   pointlist::Ptr{Cdouble}
   pointattributelist::Ptr{Cdouble}
   pointmarkerlist::Ptr{Cint}

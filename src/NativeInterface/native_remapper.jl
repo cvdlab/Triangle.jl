@@ -1,4 +1,4 @@
-type TriangulateInputMapper
+mutable struct TriangulateInputMapper
   originalVerticesMarkers::Vector{Cint}
   remappedVerticesMarkers::Vector{Cint}
   originalEdgesList::Vector{Cint}
