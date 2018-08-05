@@ -1,8 +1,15 @@
-environment:
-  matrix:
-    - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.6/julia-0.6-latest-win32.exe"
-    - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+image: Visual Studio 2015
+pull_requests:
+  do_not_increment_build_number: true
 
+environment:
+  fast_finish: true
+  matrix:
+    - platform: x86
+      JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.6/julia-0.6-latest-win32.exe"
+    - platform: x64
+      JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+      
 branches:
   only:
     - appveyor
