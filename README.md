@@ -1,9 +1,12 @@
 ﻿# TRIANGLE.jl
 
 [![Build Status](https://travis-ci.org/cvdlab/TRIANGLE.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
 [![Coverage Status](https://coveralls.io/repos/github/cvdlab/TRIANGLE.jl/badge.svg)](https://coveralls.io/github/cvdlab/TRIANGLE.jl)
-[![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
+[![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
+
+
 
 A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
 
