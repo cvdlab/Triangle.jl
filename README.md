@@ -1,10 +1,12 @@
 # TRIANGLE.jl
 
-[![Build Status](https://travis-ci.org/cvdlab/TRIANGLE.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl?ref=badge_shield)
-
+[![Build Status](https://travis-ci.org/cvdlab/TRIANGLE.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
 [![Coverage Status](https://coveralls.io/repos/github/cvdlab/TRIANGLE.jl/badge.svg)](https://coveralls.io/github/cvdlab/TRIANGLE.jl)
-[![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
+[![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl?ref=badge_shield)
+
 
 A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
 
@@ -17,9 +19,6 @@ Note that while this binding-library is under a permissive license ([MIT](LICENS
 > Please note that although Triangle is freely available, it is copyrighted by the author and may not be sold or included in commercial products without a license.
 
 So be wary of any possible conflict between your project license and [Triangle](https://www.cs.cmu.edu/~quake/triangle.html)'s
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl?ref=badge_large)
 
 ## Installing
 
