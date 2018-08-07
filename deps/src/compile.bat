@@ -1,16 +1,20 @@
 @echo off
 
-echo %~dp0VC
+if "%2" == "" goto x64
+if "%2" == "x64" goto x64
+if "%2" == "x86" goto x86
 
-set VCPOS=%USERPROFILE%\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0
-set VCINSTALLDIR=%VCPOS%\VC\
-set WindowsSdkDir=%VCPOS%\WinSDK\
-if not exist "%VCINSTALLDIR%Bin\amd64\cl.exe" goto missing
-set PATH=%VCINSTALLDIR%Bin\amd64;%WindowsSdkDir%Bin\x64;%WindowsSdkDir%Bin;%PATH%
-set INCLUDE=%VCINSTALLDIR%Include;%WindowsSdkDir%Include;%INCLUDE%
-set LIB=%VCINSTALLDIR%Lib\amd64;%WindowsSdkDir%Lib\x64;%LIB%
-set LIBPATH=%VCINSTALLDIR%Lib\amd64;%WindowsSdkDir%Lib\x64;%LIBPATH%
+:x64
+echo Setting x64
+call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+goto parsebuild
 
+:x86
+echo Setting x86
+call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
+goto parsebuild
+
+:parsebuild
 if "%1" == "" goto all
 
 if /i %1 == all       goto all
