@@ -26,8 +26,6 @@ isfile("deps.jl") && rm("deps.jl")
                     `cmd /c copy triangle.h $headerdir`
                     `cmd /c copy tricall.h $headerdir`
                     `cmd /c copy commondefine.h $headerdir`
-                    `cmd /c dir $libdir`
-                    `cmd /c dir $headerdir`
                     `cmd /c compile.bat clean $arch`
             end) end) end
 
