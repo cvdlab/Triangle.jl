@@ -17,9 +17,9 @@ julia:
 notifications:
   email: false
 
-before_script:
-  - curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash
-  - cd $TRAVIS_BUILD_DIR && fossa
+# before_script:
+#  - curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash
+#  - cd $TRAVIS_BUILD_DIR && fossa
   
 after_success:
   - julia -e 'cd(Pkg.dir("TRIANGLE")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
