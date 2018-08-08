@@ -22,7 +22,7 @@ notifications:
 #  - cd $TRAVIS_BUILD_DIR && fossa
   
 after_success:
-  - julia -e 'cd(Pkg.dir("TRIANGLE")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
+  - julia -e 'cd(Pkg.dir("Triangle")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder())'
   - cd $TRAVIS_BUILD_DIR && julia -e 'Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'  
 
 deploy:

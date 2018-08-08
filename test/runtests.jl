@@ -1,9 +1,9 @@
-module TestTRIANGLE
+module TestTriangle
 
 using Base.Test
-using TRIANGLE
+using Triangle
 
-include("test_TRIANGLE_NativeInterface_trioptions.jl")
-include("test_TRIANGLE.jl")
+include("test_Triangle_NativeInterface_trioptions.jl")
+include("test_Triangle.jl")
 
 end

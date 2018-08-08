@@ -1,11 +1,11 @@
 # TRIANGLE.jl
 
-[![Build Status](https://travis-ci.org/cvdlab/TRIANGLE.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)
+[![Build Status](https://travis-ci.org/cvdlab/Triangle.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)
 [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
-[![Coverage Status](https://coveralls.io/repos/github/cvdlab/TRIANGLE.jl/badge.svg)](https://coveralls.io/github/cvdlab/TRIANGLE.jl)
+[![Coverage Status](https://coveralls.io/repos/github/cvdlab/Triangle.jl/badge.svg)](https://coveralls.io/github/cvdlab/Triangle.jl)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
 [![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcvdlab%2FTRIANGLE.jl?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcvdlab%Triangle.jl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcvdlab%2FTriangle.jl?ref=badge_shield)
 
 
 A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
@@ -22,7 +22,7 @@ So be wary of any possible conflict between your project license and [Triangle](
 
 ## Installing
 
-Just run `Pkg.clone("https://github.com/cvdlab/TRIANGLE.jl.git")` and `Pkg.build("TRIANGLE")`
+Just run `Pkg.clone("https://github.com/cvdlab/Triangle.jl.git")` and `Pkg.build("Triangle")`
 
 ### Windows
 
@@ -30,6 +30,6 @@ The build proces uses [VC++ for Python](https://www.microsoft.com/en-us/download
 
 ## API
 
-Include the module (`using TRIANGLE`).
+Include the module (`using Triangle`).
 
-You can use Julia `?TRIANGLE.methodname` for inline documentation. Documentation can be read on https://cvdlab.github.io/TRIANGLE.jl/ .
+You can use Julia `?Triangle.methodname` for inline documentation. Documentation can be read on https://cvdlab.github.io/Triangle.jl/ .

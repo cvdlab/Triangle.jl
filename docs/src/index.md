@@ -1,4 +1,4 @@
-# TRIANGLE.jl Documentation
+# Triangle.jl Documentation
 
 A Julia interface to Jonathan Richard Shewchuk [Triangle](https://www.cs.cmu.edu/~quake/triangle.html).
 

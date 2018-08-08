@@ -1,6 +1,6 @@
 include("../src/NativeInterface/options_structure.jl")
 
-@testset "TRIANGLE.NativeInterface.TriangulateOptions" begin
+@testset "Triangle.NativeInterface.TriangulateOptions" begin
     @testset "getTriangulateStringOptions()" begin
         @testset "Default" begin
             opt = TriangulateOptions()

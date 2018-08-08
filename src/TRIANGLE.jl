@@ -1,11 +1,11 @@
-module TRIANGLE
+module Triangle
 export basic_triangulation
 export basic_triangulation_vertices
 export constrained_triangulation
 export constrained_triangulation_vertices
 
 if !isfile(joinpath(dirname(@__FILE__), "..", "deps", "deps.jl"))
-  error("TRIANGLE is not properly installed. Please run\nPkg.build(\"TRIANGLE\")")
+  error("Triangle is not properly installed. Please run\nPkg.build(\"Triangle\")")
 end
 
 include("common.jl")
@@ -19,7 +19,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
@@ -27,7 +27,7 @@ julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
  1.0  0.0
  0.0  1.0
 
-julia> TRIANGLE.basic_triangulation_vertices(points)
+julia> Triangle.basic_triangulation_vertices(points)
 1-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 0.0; 0.0 1.0]
 ```
@@ -48,7 +48,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
@@ -62,7 +62,7 @@ julia> points_map = [1, 2, 3]
  2
  3
 
-julia> TRIANGLE.basic_triangulation(points,points_map)
+julia> Triangle.basic_triangulation(points,points_map)
 1-element Array{Array{Int64,1},1}:
  [1, 2, 3]
 ```
@@ -83,7 +83,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE 
+julia> using Triangle 
 
 julia> points = Array{Float64,2}([0. 0.; 1. 0.; 0. 1.])
 3×2 Array{Float64,2}:
@@ -97,7 +97,7 @@ julia> points_map = [1, 2, 3]
  2
  3
 
-julia> TRIANGLE.basic_triangulation_vertices(points,points_map)
+julia> Triangle.basic_triangulation_vertices(points,points_map)
 1-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 0.0; 0.0 1.0]
 ```
@@ -120,7 +120,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
@@ -149,7 +149,7 @@ julia> edges_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
  5  6
  6  1
 
-julia> TRIANGLE.constrained_triangulation(points,points_map,edges_list)
+julia> Triangle.constrained_triangulation(points,points_map,edges_list)
 4-element Array{Array{Int64,1},1}:
  [1, 4, 2]
  [4, 1, 6]
@@ -175,7 +175,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
@@ -204,7 +204,7 @@ julia> edges_list = Array{Int64,2}([1 2; 2 3; 3 4; 4 5; 5 6; 6 1])
  5  6
  6  1
 
-julia> TRIANGLE.constrained_triangulation_vertices(points,points_map,edges_list)
+julia> Triangle.constrained_triangulation_vertices(points,points_map,edges_list)
 4-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 1.0; 0.0 3.0]
  [1.0 1.0; 0.0 0.0; 2.0 0.0]
@@ -232,7 +232,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
@@ -270,7 +270,7 @@ julia> edge_boundary = [false, false, true, true, false, false]
  false
  false
 
-julia> TRIANGLE.constrained_triangulation(points,points_map,edges_list,edge_boundary)
+julia> Triangle.constrained_triangulation(points,points_map,edges_list,edge_boundary)
 4-element Array{Array{Int64,1},1}:
  [1, 4, 2]
  [4, 1, 6]
@@ -298,7 +298,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = [0. 0.; 0. 3.; 1. 3.; 1. 1.; 2. 1.; 2. 0.]
 6×2 Array{Float64,2}:
@@ -336,7 +336,7 @@ julia> edge_boundary = [false, false, true, true, false, false]
  false
  false
 
-julia> TRIANGLE.constrained_triangulation_vertices(points,points_map,edges_list,edge_boundary)
+julia> Triangle.constrained_triangulation_vertices(points,points_map,edges_list,edge_boundary)
 4-element Array{Array{Float64,2},1}:
  [0.0 0.0; 1.0 1.0; 0.0 3.0]
  [1.0 1.0; 0.0 0.0; 2.0 0.0]
@@ -366,7 +366,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
 6×2 Array{Float64,2}:
@@ -414,7 +414,7 @@ julia> holes = [4. 2.]
 1×2 Array{Float64,2}:
  4.0  2.0
 
-julia> TRIANGLE.constrained_triangulation(points, points_map, edges_list, edge_boundary, holes)
+julia> Triangle.constrained_triangulation(points, points_map, edges_list, edge_boundary, holes)
 3-element Array{Array{Int64,1},1}:
  [1,2,3]
  [5,6,3]
@@ -443,7 +443,7 @@ The function will return an array of array of 3-vertices lists (triangles with t
 
 # Example
 ```jldoctest
-julia> using TRIANGLE
+julia> using Triangle
 
 julia> points = Array{Float64,2}([0. 0.; 4. 0.; 2. 3.; 8. 0.; 6. 3.; 4. 6.])
 6×2 Array{Float64,2}:
@@ -491,7 +491,7 @@ julia> holes = [4. 2.]
 1×2 Array{Float64,2}:
  4.0  2.0
 
-julia> TRIANGLE.constrained_triangulation_vertices(points, points_map, edges_list, edge_boundary, holes)
+julia> Triangle.constrained_triangulation_vertices(points, points_map, edges_list, edge_boundary, holes)
 3-element Array{Array{Float64,2},1}:
  [0.0 0.0; 4.0 0.0; 2.0 3.0]
  [6.0 3.0; 4.0 6.0; 2.0 3.0]

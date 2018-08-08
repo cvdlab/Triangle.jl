@@ -33,8 +33,8 @@ install:
 build_script:
   - IF EXIST .git\shallow (git fetch --unshallow)
   - C:\projects\julia\bin\julia -e "versioninfo();
-      Pkg.clone(pwd(), \"TRIANGLE\"); Pkg.build(\"TRIANGLE\")"
+      Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
 
 # Issue with appveyor enviroment, Julia crashes
 # test_script:
-#  - C:\projects\julia\bin\julia -e "Pkg.test(\"TRIANGLE\")"
+#  - C:\projects\julia\bin\julia -e "Pkg.test(\"Triangle\")"
