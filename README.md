@@ -1,6 +1,6 @@
 # TRIANGLE.jl
 
-[![Build Status](https://travis-ci.org/cvdlab/Triangle.jl.svg?branch=master)](https://travis-ci.org/cvdlab/TRIANGLE.jl)
+[![Build Status](https://travis-ci.org/cvdlab/Triangle.jl.svg?branch=master)](https://travis-ci.org/cvdlab/Triangle.jl)
 [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
 [![Coverage Status](https://coveralls.io/repos/github/cvdlab/Triangle.jl/badge.svg)](https://coveralls.io/github/cvdlab/Triangle.jl)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
@@ -22,7 +22,7 @@ So be wary of any possible conflict between your project license and [Triangle](
 
 ## Installing
 
-Just run `Pkg.clone("https://github.com/cvdlab/Triangle.jl.git")` and `Pkg.build("Triangle")`
+`Pkg.install("Triangle")`
 
 ### Windows
 
