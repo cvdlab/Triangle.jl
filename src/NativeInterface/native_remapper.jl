@@ -28,7 +28,7 @@ function trimap_to_native(verticesMap::Vector{Cint}, edges::Vector{Cint} = Vecto
 end
 
 function trimap_from_native(nativeMap::TriangulateInputMapper, trianglelist::Vector{Cint})
-    newtrianglelist = Vector{Cint}(length(trianglelist))
+    newtrianglelist = Vector{Cint}(undef, length(trianglelist))
 
     for (idx,el) in enumerate(trianglelist)
         newtrianglelist[idx] = nativeMap.originalVerticesMarkers[el]

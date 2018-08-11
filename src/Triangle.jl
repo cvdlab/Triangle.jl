@@ -505,14 +505,14 @@ end
 function map_to_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, triangle_list::Array{Array{Int64, 1},1})
   vert_size = size(vertices)
 
-  map_positions = Array{Int64,1}(length(vertices_map))
+  map_positions = Array{Int64,1}(undef, length(vertices_map))
   for i in 1:1:length(vertices_map)
     map_positions[vertices_map[i]] = i
   end
 
   triangle_list_vertices = Array{Array{Float64,2},1}()
   for i in 1:1:length(triangle_list)
-        triangle = Array{Float64}(3,2)
+        triangle = Array{Float64}(undef, 3,2)
         triangle[1] = vertices[map_positions[triangle_list[i][1]]]
         triangle[4] = vertices[map_positions[triangle_list[i][1]]+vert_size[1]]
         triangle[2] = vertices[map_positions[triangle_list[i][2]]]

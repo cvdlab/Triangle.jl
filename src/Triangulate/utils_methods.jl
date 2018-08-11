@@ -11,7 +11,7 @@ end
 
 function flat_vertices(vertices::Array{Float64,2}, vertices_map::Array{Int64,1})
     vert_size = size(vertices)
-    flat_vertices_vector = Vector{Cdouble}(vert_size[1]*vert_size[2])
+    flat_vertices_vector = Vector{Cdouble}(undef, vert_size[1]*vert_size[2])
     
     # for vert_id in vertices_map
     for vert_id=1:vert_size[1]
@@ -24,7 +24,7 @@ end
 
 function flat_edges(edges::Array{Int64,2})
     edge_size = size(edges)
-    flat_edges_vector = Vector{Cint}(edge_size[1]*edge_size[2])
+    flat_edges_vector = Vector{Cint}(undef, edge_size[1]*edge_size[2])
 
     for edge_id=1:edge_size[1]
         flat_edges_vector[(edge_id*2)-1]=edges[edge_id]
