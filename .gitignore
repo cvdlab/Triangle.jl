@@ -55,6 +55,7 @@ dkms.conf
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
+deps/*.log
 deps/deps.jl
 deps/usr/**/*.h
 deps/usr/**/*.c

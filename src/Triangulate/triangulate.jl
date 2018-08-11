@@ -17,12 +17,12 @@ function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Arr
 end
 
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1})
-    return constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary, Array{Float64,2}(0,0))
+    return constrained_triangulation(vertices, vertices_map, edges_list, edges_boundary, Array{Float64,2}(undef, 0,0))
 end
 
 function constrained_triangulation(vertices::Array{Float64,2}, vertices_map::Array{Int64,1}, edges_list::Array{Int64,2}, edges_boundary::Array{Bool,1}, holes::Array{Float64,2})
     local flatted_vertices = flat_vertices(vertices, vertices_map)
-    local vector_map = Vector{Cint}(undef, vertices_map)
+    local vector_map = Vector{Cint}(vertices_map)
     local flatted_edges = flat_edges(edges_list)
     local flat_triangle_list::Vector{Cdouble}
 
