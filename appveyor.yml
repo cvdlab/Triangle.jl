@@ -1,4 +1,4 @@
-version: 0.1.1.{build}
+version: 0.2.0.{build}
 image: Visual Studio 2015
 pull_requests:
   do_not_increment_build_number: true
@@ -41,9 +41,8 @@ install:
 
 build_script:
   - IF EXIST .git\shallow (git fetch --unshallow)
-  - C:\projects\julia\bin\julia -e "versioninfo();
-      Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
+  - C:\projects\julia\bin\julia -e "InteractiveUtils.versioninfo(); using Pkg; Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
 
 # Issue with appveyor enviroment, Julia crashes
 # test_script:
-#  - C:\projects\julia\bin\julia -e "Pkg.test(\"Triangle\")"
+#  - C:\projects\julia\bin\julia -e "using Pkg; Pkg.test(\"Triangle\")"

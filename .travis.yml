@@ -21,7 +21,7 @@ julia:
 matrix:
   allow_failures:
   - julia: nightly
-  
+
 notifications:
   email: false
 
@@ -32,7 +32,7 @@ notifications:
 after_success:
   - julia -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("Coverage");'
   - julia -e 'import Triangle; cd(dirname(dirname(pathof(Triangle)))); include(joinpath("docs", "make.jl"))'
-  - julia -e 'using Coverage; import BufferedStreams; cd(dirname(dirname(pathof(BufferedStreams)))); Codecov.submit(process_folder())' 
+  - julia -e 'using Coverage; import Triangle; cd(dirname(dirname(pathof(Triangle)))); Codecov.submit(process_folder())' 
 
 deploy:
   provider: pages
