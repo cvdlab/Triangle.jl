@@ -25,7 +25,7 @@ So be wary of any possible conflict between your project license and [Triangle](
 using Pkg
 add("Triangle")
 
-# Pkg.add("BufferedStreams") on julia prior to v0.7
+# Pkg.add("Triangle") on julia prior to v0.7
 ```
 
 ### Windows
