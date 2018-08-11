@@ -1,7 +1,7 @@
 # TRIANGLE.jl
 
 [![Build Status](https://img.shields.io/travis/cvdlab/Triangle.jl/master.svg?label=Linux+/+macOS)](https://travis-ci.org/cvdlab/Triangle.jl)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
+[![Windows build status](https://ci.appveyor.com/api/projects/status/s3ngfuitqpsnbgml/branch/master?svg=true)](https://ci.appveyor.com/project/furio/triangle-jl/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/cvdlab/Triangle.jl/badge.svg)](https://coveralls.io/github/cvdlab/Triangle.jl)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
 [![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
