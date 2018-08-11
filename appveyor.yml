@@ -41,7 +41,7 @@ install:
 
 build_script:
   - IF EXIST .git\shallow (git fetch --unshallow)
-  - C:\projects\julia\bin\julia -e "InteractiveUtils.versioninfo(); using Pkg; Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
+  - C:\projects\julia\bin\julia -e "using InteractiveUtils; InteractiveUtils.versioninfo(); using Pkg; Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
 
 # Issue with appveyor enviroment, Julia crashes
 # test_script:
