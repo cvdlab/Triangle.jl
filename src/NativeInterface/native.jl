@@ -69,7 +69,7 @@ function calculate_output(inputTriData::Tuple{TriangulateIO,TriangulateInputMapp
   # println(tupleRes[1])
 
   triangleList = unsafe_wrap(Array, tupleRes[1].trianglelist, 
-  tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, true)
+  tupleRes[1].numberoftriangles * tupleRes[1].numberofcorners, own=true)
   
   # Clean C
   inTri.pointlist = C_NULL

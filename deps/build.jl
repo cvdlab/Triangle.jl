@@ -11,7 +11,7 @@ isfile("deps.jl") && rm("deps.jl")
     libdir = joinpath(prefix, "lib")
     headerdir = joinpath(prefix, "include")
 
-    if is_windows()
+    if Sys.iswindows()
         libfile = joinpath(libdir, "libtriangle.dll")
         arch = "x86"
         if Sys.WORD_SIZE == 64
@@ -32,7 +32,7 @@ isfile("deps.jl") && rm("deps.jl")
         provides(Binaries, URI(libfile), libtriangle)
     else 
         libname = "libtriangle.so"
-        if is_apple()
+        if Sys.isapple()
             libname = "libtriangle.dylib"
         end
         libfile = joinpath(libdir, libname)

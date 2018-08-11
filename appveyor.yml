@@ -1,4 +1,4 @@
-version: 0.1.1.{build}
+version: 0.2.0.{build}
 image: Visual Studio 2015
 pull_requests:
   do_not_increment_build_number: true
@@ -7,8 +7,16 @@ environment:
   fast_finish: true
   matrix:
     - platform: x64
-      JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
-      
+      JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.7/julia-0.7.0-win64.exe"
+    - platform: x64
+      JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0.0-win64.exe"
+    - platform: x64
+      JULIA_URL: "https://julialangnightlies-s3.julialang.org/bin/winnt/x64/julia-latest-win64.exe"
+
+matrix:
+    allow_failures:
+    - JULIA_URL: "https://julialangnightlies-s3.julialang.org/bin/winnt/x64/julia-latest-win64.exe"
+
 branches:
   only:
     - master
@@ -32,9 +40,8 @@ install:
 
 build_script:
   - IF EXIST .git\shallow (git fetch --unshallow)
-  - C:\projects\julia\bin\julia -e "versioninfo();
-      Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
+  - C:\projects\julia\bin\julia -e "using InteractiveUtils; InteractiveUtils.versioninfo(); using Pkg; Pkg.clone(pwd(), \"Triangle\"); Pkg.build(\"Triangle\")"
 
 # Issue with appveyor enviroment, Julia crashes
 # test_script:
-#  - C:\projects\julia\bin\julia -e "Pkg.test(\"Triangle\")"
+#  - C:\projects\julia\bin\julia -e "using Pkg; Pkg.test(\"Triangle\")"
