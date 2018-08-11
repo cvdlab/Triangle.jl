@@ -7,7 +7,7 @@ function ctriangulate(inTri::TriangulateIO, options::String)
   
   ccall(
     (:call_triangulate, libtriangle), 
-    Void, 
+    Nothing, 
     (Ptr{UInt8}, Ref{TriangulateIO}, Ref{TriangulateIO}, Ref{TriangulateIO}), 
     options, Ref(inTri), Ref(outTri), Ref(voronoiTri)
   )

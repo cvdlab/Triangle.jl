@@ -1,6 +1,6 @@
 module TestTriangle
 
-using Base.Test
+using Test
 using Triangle
 
 include("test_Triangle_NativeInterface_trioptions.jl")
