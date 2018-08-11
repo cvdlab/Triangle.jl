@@ -1,7 +1,7 @@
 # TRIANGLE.jl
 
-[![Build Status](https://travis-ci.org/cvdlab/Triangle.jl.svg?branch=master)](https://travis-ci.org/cvdlab/Triangle.jl)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
+[![Build Status](https://img.shields.io/travis/cvdlab/Triangle.jl/master.svg?label=Linux+/+macOS)](https://travis-ci.org/cvdlab/Triangle.jl)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/furio/triangle-jl?branch=master&svg=true)](https://ci.appveyor.com/project/furio/triangle-jl)
 [![Coverage Status](https://coveralls.io/repos/github/cvdlab/Triangle.jl/badge.svg)](https://coveralls.io/github/cvdlab/Triangle.jl)
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://cvdlab.github.io/TRIANGLE.jl/)
 [![DOI](https://zenodo.org/badge/doi/10.1007/BFb0014497.svg)](http://dx.doi.org/10.1007/BFb0014497)
@@ -20,13 +20,17 @@ Note that while this binding-library is under a permissive license ([MIT](LICENS
 
 So be wary of any possible conflict between your project license and [Triangle](https://www.cs.cmu.edu/~quake/triangle.html)'s
 
-## Installing
+## Installation
+```julia
+using Pkg
+add("Triangle")
 
-Just run `Pkg.clone("https://github.com/cvdlab/Triangle.jl.git")` and `Pkg.build("Triangle")`
+# Pkg.add("BufferedStreams") on julia prior to v0.7
+```
 
 ### Windows
 
-The build proces uses [VC++ for Python](https://www.microsoft.com/en-us/download/details.aspx?id=44266) to build so be sure you have it before running the build part.
+The build proces uses VC++ binary to build so be sure you have it before running the build part.
 
 ## API
 
