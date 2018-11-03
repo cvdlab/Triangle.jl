@@ -1,7 +1,7 @@
 var documenterSearchIndex = {"docs": [
 
 {
-    "location": "index.html#",
+    "location": "#",
     "page": "Home",
     "title": "Home",
     "category": "page",
@@ -9,7 +9,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.jl-Documentation-1",
+    "location": "#Triangle.jl-Documentation-1",
     "page": "Home",
     "title": "Triangle.jl Documentation",
     "category": "section",
@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.basic_triangulation_vertices-Tuple{Array{Float64,2}}",
+    "location": "#Triangle.basic_triangulation_vertices-Tuple{Array{Float64,2}}",
     "page": "Home",
     "title": "Triangle.basic_triangulation_vertices",
     "category": "method",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.basic_triangulation-Tuple{Array{Float64,2},Array{Int64,1}}",
+    "location": "#Triangle.basic_triangulation-Tuple{Array{Float64,2},Array{Int64,1}}",
     "page": "Home",
     "title": "Triangle.basic_triangulation",
     "category": "method",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.basic_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1}}",
+    "location": "#Triangle.basic_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1}}",
     "page": "Home",
     "title": "Triangle.basic_triangulation_vertices",
     "category": "method",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.constrained_triangulation-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2}}",
+    "location": "#Triangle.constrained_triangulation-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2}}",
     "page": "Home",
     "title": "Triangle.constrained_triangulation",
     "category": "method",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.constrained_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2}}",
+    "location": "#Triangle.constrained_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2}}",
     "page": "Home",
     "title": "Triangle.constrained_triangulation_vertices",
     "category": "method",
@@ -57,7 +57,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.constrained_triangulation-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2},Array{Bool,1}}",
+    "location": "#Triangle.constrained_triangulation-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2},Array{Bool,1}}",
     "page": "Home",
     "title": "Triangle.constrained_triangulation",
     "category": "method",
@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Triangle.constrained_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2},Array{Bool,1}}",
+    "location": "#Triangle.constrained_triangulation_vertices-Tuple{Array{Float64,2},Array{Int64,1},Array{Int64,2},Array{Bool,1}}",
     "page": "Home",
     "title": "Triangle.constrained_triangulation_vertices",
     "category": "method",
@@ -73,7 +73,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Functions-1",
+    "location": "#Functions-1",
     "page": "Home",
     "title": "Functions",
     "category": "section",
@@ -81,7 +81,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Index-1",
+    "location": "#Index-1",
     "page": "Home",
     "title": "Index",
     "category": "section",
