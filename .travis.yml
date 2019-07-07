@@ -13,8 +13,7 @@ addons:
     update: true
 
 julia:
-  - 0.7
-  - 1.0
+  - 1.2
   - nightly
 
 matrix:

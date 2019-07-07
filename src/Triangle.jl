@@ -1,4 +1,7 @@
 module Triangle
+
+using Libdl
+
 export basic_triangulation
 export basic_triangulation_vertices
 export constrained_triangulation
