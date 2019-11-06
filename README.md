@@ -30,7 +30,7 @@ add("Triangle")
 
 ### Windows
 
-The build proces uses VC++ binary to build so be sure you have it before running the build part.
+The build proces uses VC++ binary (2013 version) to build so be sure you have it before running the build part.
 
 ## API
 
