@@ -1,5 +1,5 @@
 name = "Triangle"
-uuid = "ad787d40-7b34-53db-b2af-6f1e758291b4"
+uuid = "56f361f5-126b-55db-87fb-1c71988fcde4"
 keywords = ["triangle", "triangulation", "delaunay-triangulation", "delaunay-refinement", "delaunay", "voronoi", "constrained-delaunay-triangulation"]
 license = "MIT"
 desc = "A Julia interface to Jonathan Richard Shewchuk's Triangle library."
