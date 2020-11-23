@@ -13,7 +13,7 @@ addons:
     update: true
 
 julia:
-  - 1.2
+  - 1.5
   - nightly
 
 matrix:
@@ -22,10 +22,6 @@ matrix:
 
 notifications:
   email: false
-
-# before_script:
-#  - curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash
-#  - cd $TRAVIS_BUILD_DIR && fossa
   
 after_success:
   - julia -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("Coverage");'
