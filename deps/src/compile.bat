@@ -6,12 +6,12 @@ if "%2" == "x86" goto x86
 
 :x64
 echo Setting x64
-call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
 goto parsebuild
 
 :x86
 echo Setting x86
-call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat"
 goto parsebuild
 
 :parsebuild
